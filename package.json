@@ -1,0 +1,17 @@
+{
+  "name": "studymate",
+  "version": "1.0.0",
+  "description": "AI-powered study assistant built with Node.js, Express, EJS, PostgreSQL and Gemini AI.",
+  "main": "server.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": [],
+  "author": "Megdelawit Abrham",
+  "license": "MIT",
+  "type": "commonjs"
+}
