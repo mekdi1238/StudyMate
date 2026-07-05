@@ -17,3 +17,8 @@ app.use('/api/auth', authRoutes);
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
 });
+const verifyToken = require('./middleware/authMiddleware');
+
+const studyRoutes = require('./routes/studyRoutes');
+// ...
+app.use('/api/studysets', studyRoutes);
