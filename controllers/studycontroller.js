@@ -64,5 +64,75 @@ async function getStudySetById(request, response) {
         });
     }
 }
+async function updateStudySet(request, response) {
+    try {
+        const studySet = await studySetModel.getStudySetById(request.params.id);
 
-module.exports = { createStudySet, getMyStudySets, getStudySetById };
+        if (!studySet) {
+            return response.status(404).json({
+                message: 'Study set not found'
+            });
+        }
+
+        if (studySet.user_id !== request.userId) {
+            return response.status(403).json({
+                message: 'You do not have permission to edit this study set'
+            });
+        }
+
+        const { topic, originalContent } = request.body;
+
+        if (!topic || !originalContent) {
+            return response.status(400).json({
+                message: 'Topic and content are both required'
+            });
+        }
+
+        const updatedStudySet = await studySetModel.updateStudySet(
+            request.params.id,
+            topic,
+            originalContent
+        );
+
+        return response.status(200).json({
+            message: 'Study set updated successfully',
+            studySet: updatedStudySet
+        });
+    } catch (error) {
+        console.log('Error in updateStudySet:', error);
+        return response.status(500).json({
+            message: 'Something went wrong while updating the study set'
+        });
+    }
+}
+
+async function deleteStudySet(request, response) {
+    try {
+        const studySet = await studySetModel.getStudySetById(request.params.id);
+
+        if (!studySet) {
+            return response.status(404).json({
+                message: 'Study set not found'
+            });
+        }
+
+        if (studySet.user_id !== request.userId) {
+            return response.status(403).json({
+                message: 'You do not have permission to delete this study set'
+            });
+        }
+
+        await studySetModel.deleteStudySet(request.params.id);
+
+        return response.status(200).json({
+            message: 'Study set deleted successfully'
+        });
+    } catch (error) {
+        console.log('Error in deleteStudySet:', error);
+        return response.status(500).json({
+            message: 'Something went wrong while deleting the study set'
+        });
+    }
+}
+
+module.exports = { createStudySet, getMyStudySets, getStudySetById, updateStudySet, deleteStudySet };

@@ -38,5 +38,30 @@ async function getStudySetById(id) {
         throw error;
     }
 }
+async function updateStudySet(id, topic, originalContent) {
+    try {
+        const result = await pool.query(
+            'UPDATE study_sets SET topic = $1, original_content = $2, updated_at = CURRENT_TIMESTAMP WHERE id = $3 RETURNING *',
+            [topic, originalContent, id]
+        );
+        return result.rows[0];
+    } catch (error) {
+        console.log('Error updating study set:', error);
+        throw error;
+    }
+}
 
-module.exports = { createStudySet, getStudySetsByUser, getStudySetById };
+async function deleteStudySet(id) {
+    try {
+        const result = await pool.query(
+            'DELETE FROM study_sets WHERE id = $1 RETURNING *',
+            [id]
+        );
+        return result.rows[0];
+    } catch (error) {
+        console.log('Error deleting study set:', error);
+        throw error;
+    }
+}
+
+module.exports = { createStudySet, getStudySetsByUser, getStudySetById, updateStudySet, deleteStudySet };
