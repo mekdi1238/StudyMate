@@ -3,6 +3,9 @@
 // Import the Express framework
 const express = require('express');
 
+// Import our database connection - this runs the connection check in config/db.js
+const pool = require('./config/db');
+
 // Create an Express application
 const app = express();
 
