@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <title>StudyMate - Study Set</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <div class="page-container">
+        <a href="dashboard.html">&larr; Back to Dashboard</a>
+
+        <div id="viewMode">
+            <h1 id="topicDisplay"></h1>
+            <div>
+                <button id="editBtn">Edit</button>
+                <button id="deleteBtn">Delete</button>
+            </div>
+
+            <h3>Original Content</h3>
+            <p id="contentDisplay"></p>
+
+            <h3>AI-Generated Study Notes</h3>
+            <div id="notesDisplay"></div>
+        </div>
+
+        <form id="editForm" class="hidden">
+            <input type="text" id="editTopic" required>
+            <textarea id="editContent" rows="10" required></textarea>
+            <button type="submit">Save Changes</button>
+            <button type="button" id="cancelEditBtn">Cancel</button>
+        </form>
+
+        <p id="errorMessage" class="error hidden"></p>
+    </div>
+
+    <script src="js/study-detail.js"></script>
+</body>
+</html>

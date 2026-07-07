@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>StudyMate - New Study Set</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <div class="page-container">
+        <a href="dashboard.html">&larr; Back to Dashboard</a>
+        <h1>New Study Set</h1>
+
+        <form id="createForm">
+            <input type="text" id="topic" placeholder="Topic" required>
+            <textarea id="originalContent" rows="10" placeholder="Paste your study content here..." required></textarea>
+            <button type="submit" id="submitBtn">Generate Study Notes</button>
+        </form>
+
+        <p id="loadingMessage" class="hidden">Generating your notes with AI, this can take a few seconds...</p>
+        <p id="errorMessage" class="error hidden"></p>
+    </div>
+
+    <script src="js/create.js"></script>
+</body>
+</html>

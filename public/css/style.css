@@ -11,12 +11,15 @@
 
 body {
     font-family: Arial, sans-serif;
-    background: #f4f4f4;
+    background: var(--color-bg);
+    margin: 0;
+}
+
+.center-screen {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    margin: 0;
 }
 
 .auth-container {
@@ -88,4 +91,17 @@ form button {
     margin-bottom: 15px;
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+.page-container {
+    max-width: 700px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+    font-family: inherit;
 }
