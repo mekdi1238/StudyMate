@@ -22,3 +22,4 @@ const verifyToken = require('./middleware/authMiddleware');
 const studyRoutes = require('./routes/studyRoutes');
 // ...
 app.use('/api/studysets', studyRoutes);
+app.use(express.static('public'));
