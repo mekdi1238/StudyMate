@@ -1,10 +1,10 @@
 const pool = require('../config/db');
 
-async function createStudySet(userId, topic, originalContent) {
+async function createStudySet(userId, topic, originalContent, generatedNotes) {
     try {
         const result = await pool.query(
-            'INSERT INTO study_sets (user_id, topic, original_content) VALUES ($1, $2, $3) RETURNING *',
-            [userId, topic, originalContent]
+            'INSERT INTO study_sets (user_id, topic, original_content, generated_notes) VALUES ($1, $2, $3, $4) RETURNING *',
+            [userId, topic, originalContent, generatedNotes]
         );
         return result.rows[0];
     } catch (error) {

@@ -1,4 +1,5 @@
 const studySetModel = require('../models/studySetModel');
+const geminiService = require('../services/geminiService');
 
 async function createStudySet(request, response) {
     try {
@@ -10,10 +11,13 @@ async function createStudySet(request, response) {
             });
         }
 
+        const generatedNotes = await geminiService.generateStudyNotes(topic, originalContent);
+
         const newStudySet = await studySetModel.createStudySet(
             request.userId,
             topic,
-            originalContent
+            originalContent,
+            generatedNotes
         );
 
         return response.status(201).json({
@@ -64,6 +68,7 @@ async function getStudySetById(request, response) {
         });
     }
 }
+
 async function updateStudySet(request, response) {
     try {
         const studySet = await studySetModel.getStudySetById(request.params.id);
