@@ -9,12 +9,13 @@
 
     <div class="dashboard-container">
         <div class="dashboard-header">
-            <h1>My Study Sets</h1>
-            <div>
-                <a href="create.html"><button>+ New Study Set</button></a>
-                <button id="logoutBtn">Logout</button>
-            </div>
-        </div>
+    <h1>My Study Sets</h1>
+    <div class="dashboard-actions">
+        <input type="text" id="searchInput" placeholder="Search by topic...">
+        <a href="create.html"><button class="btn-primary">+ New Study Set</button></a>
+        <button id="logoutBtn" class="btn-secondary">Logout</button>
+    </div>
+</div>
 
         <div id="studySetsList"></div>
         <p id="emptyMessage" class="hidden">You don't have any study sets yet.</p>

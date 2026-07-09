@@ -34,7 +34,8 @@ async function createStudySet(request, response) {
 
 async function getMyStudySets(request, response) {
     try {
-        const studySets = await studySetModel.getStudySetsByUser(request.userId);
+        const searchTerm = request.query.search;
+        const studySets = await studySetModel.getStudySetsByUser(request.userId, searchTerm);
         return response.status(200).json({ studySets });
     } catch (error) {
         console.log('Error in getMyStudySets:', error);

@@ -1,5 +1,9 @@
 const token = localStorage.getItem('token');
-
+window.addEventListener('pageshow', function(event) {
+    if (event.persisted) {
+        window.location.reload();
+    }
+});
 if (!token) {
     window.location.href = 'login.html';
 }
@@ -7,10 +11,16 @@ if (!token) {
 const studySetsList = document.getElementById('studySetsList');
 const emptyMessage = document.getElementById('emptyMessage');
 const logoutBtn = document.getElementById('logoutBtn');
+const searchInput = document.getElementById('searchInput');
 
-async function loadStudySets() {
+async function loadStudySets(searchTerm) {
     try {
-        const response = await fetch('/api/studysets', {
+        let url = '/api/studysets';
+        if (searchTerm) {
+            url += '?search=' + encodeURIComponent(searchTerm);
+        }
+
+        const response = await fetch(url, {
             headers: { 'Authorization': 'Bearer ' + token }
         });
 
@@ -22,10 +32,14 @@ async function loadStudySets() {
 
         const data = await response.json();
 
+        studySetsList.innerHTML = '';
+
         if (data.studySets.length === 0) {
             emptyMessage.classList.remove('hidden');
             return;
         }
+
+        emptyMessage.classList.add('hidden');
 
         data.studySets.forEach(function(studySet) {
             const card = document.createElement('div');
@@ -41,6 +55,14 @@ async function loadStudySets() {
         console.log('Error loading study sets:', error);
     }
 }
+
+let searchTimeout;
+searchInput.addEventListener('input', function() {
+    clearTimeout(searchTimeout);
+    searchTimeout = setTimeout(function() {
+        loadStudySets(searchInput.value);
+    }, 300);
+});
 
 logoutBtn.addEventListener('click', function() {
     localStorage.removeItem('token');

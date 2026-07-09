@@ -13,8 +13,16 @@ async function createStudySet(userId, topic, originalContent, generatedNotes) {
     }
 }
 
-async function getStudySetsByUser(userId) {
+async function getStudySetsByUser(userId, searchTerm) {
     try {
+        if (searchTerm) {
+            const result = await pool.query(
+                'SELECT * FROM study_sets WHERE user_id = $1 AND topic ILIKE $2 ORDER BY created_at DESC',
+                [userId, '%' + searchTerm + '%']
+            );
+            return result.rows;
+        }
+
         const result = await pool.query(
             'SELECT * FROM study_sets WHERE user_id = $1 ORDER BY created_at DESC',
             [userId]
