@@ -7,6 +7,10 @@ const PORT = 3000;
 
 app.use(express.json());
 
+const requestLogger = require('./middleware/logger');
+
+app.use(requestLogger);
+
 app.get('/', (req, res) => {
     console.log('Home route was hit');
     res.send('StudyMate server is running!');
